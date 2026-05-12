@@ -1,29 +1,42 @@
 let totalRounds = 0;
 let currentRound = 1;
 let maxRound = 0;
-let availableImages = [];
+let availableQuestions = [];
 let timeLeft = 7;
 let countdown;
+let score = 0; // 점수 저장
+
+// 이미지와 정답 매칭 배열
+const questions = [
+    { img: "img/img1.jpg", answer: "사과" },
+    { img: "img/img2.jpg", answer: "바나나" },
+    { img: "img/img3.jpg", answer: "포도" },
+    { img: "img/img4.jpg", answer: "딸기" },
+    { img: "img/img5.jpg", answer: "오렌지" },
+    { img: "img/img6.jpg", answer: "수박" },
+    { img: "img/img7.jpg", answer: "복숭아" },
+    { img: "img/img8.jpg", answer: "레몬" },
+    { img: "img/img9.jpg", answer: "체리" },
+    { img: "img/img10.jpg", answer: "키위" },
+    { img: "img/img11.jpg", answer: "파인애플" },
+    { img: "img/img12.jpg", answer: "망고" },
+    { img: "img/img13.jpg", answer: "멜론" },
+    { img: "img/img14.jpg", answer: "자두" },
+    { img: "img/img15.jpg", answer: "블루베리" }
+];
 
 function startGame(count) {
     totalRounds = count;
     maxRound = count;
     currentRound = 1;
+    score = 0;
 
-    // 라운드 정보 업데이트
     document.getElementById("round-info").textContent = "라운드: " + currentRound + "/" + totalRounds;
+    availableQuestions = shuffle(questions).slice(0, maxRound);
 
-    // 이미지 배열 준비
-    availableImages = [];
-    for (let i = 1; i <= maxRound; i++) {
-        availableImages.push(`img/img${i}.jpg`);
-    }
-
-    // 화면 전환
     document.getElementById("setup").style.display = "none";
     document.getElementById("game-display").style.display = "block";
 
-    // 첫 라운드 시작
     loadQuestion();
     startTimer();
 }
@@ -63,36 +76,78 @@ function nextRound() {
         loadQuestion();
         startTimer();
     } else {
-        timerElement.textContent = "게임 종료";
+        endGame();
     }
 }
 
 function loadQuestion() {
     const questionArea = document.getElementById("question-area");
+    const currentQuestion = availableQuestions[currentRound - 1];
+    questionArea.innerHTML = `<img src="${currentQuestion.img}" alt="문제 이미지" style="max-width:100%; height:auto;">`;
+}
 
-    if (availableImages.length === 0) {
-        questionArea.innerHTML = `<p>이미지가 모두 사용되었습니다!</p>`;
+function endGame() {
+    document.getElementById("game-display").style.display = "none";
+    document.getElementById("result-display").style.display = "block";
+
+    document.getElementById("final-score").innerHTML = `
+        전체 문제 수: ${maxRound}문제 <br>
+        맞춘 점수: ${score}점
+    `;
+}
+
+
+function shuffle(array) {
+    let arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// 정답 제출 함수
+function submitAnswer() {
+    const userAnswer = document.getElementById("user-answer").value.trim();
+    const feedbackElement = document.getElementById("feedback");
+
+    if (userAnswer === "") {
+        feedbackElement.textContent = "정답을 입력하세요!";
+        feedbackElement.style.color = "orange";
         return;
     }
 
-    const randomIndex = Math.floor(Math.random() * availableImages.length);
-    const selectedImage = availableImages[randomIndex];
-    availableImages.splice(randomIndex, 1);
+    const currentQuestion = availableQuestions[currentRound - 1];
 
-    questionArea.innerHTML = `<img src="${selectedImage}" alt="문제 이미지" style="max-width:100%; height:auto;">`;
+    if (userAnswer === currentQuestion.answer) {
+        score++;
+        feedbackElement.textContent = "정답!";
+        feedbackElement.style.color = "green";
+    } else {
+        feedbackElement.textContent = "오답!";
+        feedbackElement.style.color = "red";
+    }
+
+    document.getElementById("user-answer").value = "";
+    clearInterval(countdown);
+
+    setTimeout(() => {
+        feedbackElement.textContent = "";
+        nextRound();
+    }, 1000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const answerButton = document.querySelector('#answer-section button');
+    const answerButton = document.getElementById("send-btn");
+    const answerInput = document.getElementById("user-answer");
 
-    answerButton.addEventListener("click", () => {
-        const userAnswer = document.getElementById("user-answer").value.trim();
-        if (userAnswer === "") {
-            alert("정답을 입력하세요!");
-            return;
+    // 버튼 클릭
+    answerButton.addEventListener("click", submitAnswer);
+
+    // 엔터 키 입력
+    answerInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            submitAnswer();
         }
-
-        clearInterval(countdown);
-        nextRound();
     });
 });
