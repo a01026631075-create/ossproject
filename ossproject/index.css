@@ -5,6 +5,14 @@ body {
     padding: 0;
 }
 
+h2 {
+    color: red;
+}
+
+#setup{
+    margin-top: 50px;
+}
+
 /* 기본 버튼 스타일 */
 #setup button {
     font-size: 20px;
@@ -66,7 +74,15 @@ main {
 /* 정답 입력 */
 #answer-section {
     margin-top: 15px;
+    margin-left: 50px;
     text-align: center;
+}
+
+
+#final-score{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 #user-answer {
