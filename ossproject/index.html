@@ -2,58 +2,114 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게임 맞추기</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
     <main>
         <!-- 시작 / 문제 갯수 선택 화면 -->
-        <section id="setup">    
-            <h1>문제 갯수를 선택하세요.</h1>
-            <h2>띄어쓰기 X, 맞춤법 상관 X</h2>
-            <button onclick="startGame(5)">5문제</button>
-            <button onclick="startGame(10)">10문제</button>
-            <button onclick="startGame(15)">15문제</button>
+        <section id="setup" class="screen">    
+            <div class="setup-container">
+                <h1 class="title-main">게임 맞추기</h1>
+                <p class="subtitle">유명한 게임들을 맞춰보세요!</p>
+                <p class="hint">띄어쓰기 X, 맞춤법 상관 X</p>
+                
+                <div class="difficulty-buttons">
+                    <button class="btn btn-difficulty btn-easy" onclick="startGame(5)">
+                        <span class="btn-number">5</span>
+                        <span class="btn-label">쉬움</span>
+                    </button>
+                    <button class="btn btn-difficulty btn-normal" onclick="startGame(10)">
+                        <span class="btn-number">10</span>
+                        <span class="btn-label">보통</span>
+                    </button>
+                    <button class="btn btn-difficulty btn-hard" onclick="startGame(15)">
+                        <span class="btn-number">15</span>
+                        <span class="btn-label">어려움</span>
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- 게임 화면 -->
-        <section id="game-display" style="display:none;">
-            
-            <div id="room-info">
-    <span class="round" id="round-info">라운드: 1/5</span>
-    <p class="score">현재 점수: <span id="current-score">0</span></p>
-</div>
+        <section id="game-display" class="screen" style="display:none;">
+            <div class="game-container">
+                <!-- 헤더 -->
+                <div class="game-header">
+                    <div class="header-left">
+                        <div class="round-badge">
+                            <span id="round-info" class="round-text">라운드: 1/5</span>
+                        </div>
+                    </div>
+                    <div class="header-center">
+                        <div class="score-display">
+                            <span class="score-label">점수</span>
+                            <span id="current-score" class="score-value">0</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <div class="timer-display">
+                            <div id="timer-circle" class="timer-circle">
+                                <span id="timer-number" class="timer-number">7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            
-            <div id="timer">남은 시간: 7초</div>
-            
-            <div id="progress-container">
-                <div id="progress-bar"></div>
+                <!-- 진행바 -->
+                <div id="progress-container" class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+
+                <!-- 문제 이미지 영역 -->
+                <div class="question-container">
+                    <div id="question-area" class="question-area">
+                        <p>[ 이미지 로딩 중... ]</p>
+                    </div>
+                </div>
+
+                <!-- 정답 입력 영역 -->
+                <div class="answer-container">
+                    <div id="feedback" class="feedback-display"></div>
+                    <div id="answer-section" class="answer-section">
+                        <input type="text" id="user-answer" class="answer-input" placeholder="정답을 입력하세요!" autocomplete="off">
+                        <button id="send-btn" class="btn btn-send" type="button">전송</button>
+                    </div>
+                </div>
             </div>
-
-            <div id="question-area">
-                <p>[ 여기에 이미지가 표시됩니다 ]</p>
-            </div>
-
-            <div id="answer-section">
-                <input type="text" id="user-answer" placeholder="정답을 입력하세요!">
-                <button id="send-btn" type="button">전송</button>
-            </div>
-
-            <!-- 정답/오답 피드백 영역 -->
-            <div id="feedback"></div>
         </section>
 
         <!-- 결과 화면 -->
-        <section id="result-display" style="display:none;">
-            <h2>게임 결과</h2>
-            <p id="final-score">최종 점수: 0점</p>
-        </section>
+        <section id="result-display" class="screen" style="display:none;">
+            <div class="result-container">
+                <div class="result-grade" id="result-grade"></div>
+                
+                <div class="result-card">
+                    <div class="score-result">
+                        <div class="final-score-display">
+                            <span id="final-score-value" class="final-score-number">0</span>
+                            <span class="final-score-label">점</span>
+                        </div>
+                    </div>
 
+                    <div class="result-details" id="result-details">
+                        <p id="final-score" class="result-text"></p>
+                    </div>
+
+                    <div class="result-progress">
+                        <div class="result-bar-container">
+                            <div id="result-bar" class="result-bar"></div>
+                        </div>
+                        <p class="result-percent" id="result-percent"></p>
+                    </div>
+                </div>
+
+                <button class="btn btn-restart" onclick="location.reload()">다시 시작</button>
+            </div>
+        </section>
     </main>
     
     <script src="index.js"></script>
-
 </body>
 </html>
