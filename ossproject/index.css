@@ -1,195 +1,602 @@
-/* 기본 레이아웃 */
-body {
-    font-family: Arial, sans-serif;
+/* ==================== 기본 설정 ==================== */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-h2 {
-    color: red;
-}
-
-#setup{
-    margin-top: 50px;
-}
-
-#current-score {
-    color: #000000;
-    font-weight: bold;
-}
-
-/* 기본 버튼 스타일 */
-#setup button {
-    font-size: 20px;
-    padding: 15px 30px;
-    margin: 10px;
-    border-radius: 8px;
-    background-color: #4CAF50; /* 기본 배경색 */
-    color: white;              /* 글자색 */
-    border: none;
-    cursor: pointer;
-}
-
-/* 마우스를 올렸을 때 */
-#setup button:hover {
-    background-color: #45a049; /* hover 시 배경색 변경 */
-    transform: scale(1.1);     /* 버튼 살짝 커지게 */
-}
-
-#progress-container {
-    width: 80%;
-    background-color: #ddd;
-    margin: 10px auto;
-    border-radius: 10px;
-    height: 20px;
-}
-
-#progress-bar {
-    width: 0%;
-    height: 100%;
-    background-color: #4CAF50;
-    border-radius: 10px;
-    margin-top: 12px;
-    transition: width 0.3s ease; /* 부드럽게 늘어나도록 */
-}
-
-
-/* 기존 #room-info 대체용 (동일 선택자 유지) */
-#room-info {
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #07d6ed 0%, #dedb0f 100%);
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px 20px; /* margin 대신 padding으로 내부 여백 처리 */
-    gap: 12px;          /* 자식 요소 간격 */
-    font-size: 22px;
-    font-weight: bold;
+    padding: 18px;
 }
 
-/* 자식 요소 기본 여백 제거(원래 코드와 동일) */
-#room-info span,
-#room-info p {
-    margin: 0;
-}
-
-
-/* 메인 레이아웃 */
 main {
+    width: 100%;
+    max-width: 800px;
+}
+
+.screen {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==================== 시작 화면 ==================== */
+#setup {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.setup-container {
     text-align: center;
 }
 
-/* 게임 화면 */
-#game-display {
-    flex-grow: 1;
-    text-align: center;
-}
-
-/* 타이머 */
-#timer {
-    font-size: 30px;
-    font-weight: bold;
+.title-main {
+    font-size: 48px;
+    font-weight: 700;
     margin-bottom: 10px;
+    background: linear-gradient(135deg, #4a4d5a 0%, #000000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* 문제 영역 */
-#question-area {
-    object-fit: cover;
-    height: 475px;
+.subtitle {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.hint {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.difficulty-buttons {
     display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-difficulty {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    padding: 25px 35px;
+    font-size: 16px;
+    color: white;
+    min-width: 150px;
+    gap: 8px;
+}
+
+.btn-number {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.btn-label {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.btn-easy {
+    background: linear-gradient(135deg, #54c75e 0%, rgb(14, 235, 14) 100%);
+}
+
+.btn-easy:hover {
+    background: linear-gradient(135deg, rgb(9, 235, 9) 0%, #54c75e 100%);
+}
+.btn-normal {
+    background: linear-gradient(135deg, #fff423 0%, #d0d000 100%);
+}
+
+.btn-normal:hover {
+    background: linear-gradient(135deg, #d0d000 0%, #fff423 100%);
+}
+
+
+.btn-hard {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.btn-hard:hover {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+}
+
+/* ==================== 게임 화면 ==================== */
+#game-display {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.game-container {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.game-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.header-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.header-center {
+    display: flex;
     justify-content: center;
 }
 
-#question-area img {
-    max-width: 100%;
-    max-height: 400px;
-    height: auto;
+.header-right {
+    display: flex;
+    justify-content: flex-end;
 }
 
+/* 라운드 배지 */
+.round-badge {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+}
 
+.round-text {
+    font-size: 16px;
+}
 
-/* 정답 입력 */
-#answer-section {
-    margin-left: 50px;
+/* 점수 표시 */
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.score-label {
+    font-size: 12px;
+    color: #999;
+    font-weight: 500;
+}
+
+.score-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+}
+
+/* 타이머 원형 */
+.timer-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 70%;
+    /* background: conic-gradient(#ff3752, #ef62ff); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    /* box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3); */
+}
+
+.timer-number {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.timer-label {
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+/* 진행바 */
+.progress-container {
+    width: 100%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+/* 문제 이미지 영역 */
+.question-container {
+    flex: 1;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.question-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.question-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    aspect-ratio: 16 / 9;
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 정답 입력 영역 */
+.answer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.feedback-display {
+    font-size: 20px;
+    font-weight: 600;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+}
+
+.feedback-display.correct {
+    animation: correctAnimation 0.6s ease;
+}
+
+.feedback-display.incorrect {
+    animation: incorrectAnimation 0.6s ease;
+}
+
+@keyframes correctAnimation {
+    0% { color: #4caf50; transform: scale(1); }
+    50% { color: #4caf50; transform: scale(1.1); }
+    100% { color: #4caf50; transform: scale(1); }
+}
+
+@keyframes incorrectAnimation {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.answer-section {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+}
+
+.answer-input {
+    flex: 1;
+    padding: 16px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.answer-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    background-color: #f9f9ff;
+}
+
+.btn-send {
+    padding: 16px 32px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    color: white;
+    min-width: 100px;
+    white-space: nowrap;
+}
+
+.btn-send:hover {
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+}
+
+.btn-send:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ==================== 결과 화면 ==================== */
+#result-display {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.result-container {
+    padding: 30px 30px;
     text-align: center;
 }
 
-#feedback {
-    font-size: 20px;
-    height: 30px;
-    font-weight:bold;
+.result-title {
+    font-size: 48px;
+    margin-bottom: 40px;
 }
 
+.result-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
 
-#final-score{
-    font-size: 30px;
-    font-weight: bold;
+.final-score-display {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.final-score-number {
+    font-size: 72px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.final-score-label {
+    font-size: 24px;
+    color: #000000;
+}
+
+.result-details {
+    margin-bottom: 30px;
+}
+
+.result-text {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    padding: 10px;
+}
+
+.result-grade {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.result-progress {
+    margin-bottom: 10px;
+}
+
+.result-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.result-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.8s ease;
+    border-radius: 5px;
+}
+
+.result-percent {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.btn-restart {
+    padding: 16px 50px;
+    font-size: 18px;
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
+    color: white;
     margin-top: 20px;
 }
 
-#user-answer {
-    padding: 10px;
-    width: 250px;
-    font-size: 20px;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    text-align: center;
+/* ==================== 반응형 디자인 ==================== */
+@media (max-width: 768px) {
+    #setup {
+        padding: 40px 25px;
+    }
+
+    .title-main {
+        font-size: 36px;
+    }
+
+    .difficulty-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn-difficulty {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .game-header {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .question-container {
+        min-height: 320px;
+    }
+
+    .question-area img {
+        width: 380px;
+        height: 380px;
+    }
+
+    .timer-circle {
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+    }
+
+    .score-value {
+        font-size: 28px;
+    }
+
+    .result-container {
+        padding: 10px 10px;
+    }
+
+    .result-title {
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+    .final-score-number {
+        font-size: 56px;
+    }
+
+    .final-score-label {
+        font-size: 20px;
+    }
 }
 
-#answer-section button {
-    padding: 10px 15px;
-    margin-left: 10px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
 
-#answer-section button:hover {
-    background-color: #45a049;
-}
+    #setup {
+        padding: 30px 20px;
+    }
 
+    .title-main {
+        font-size: 28px;
+    }
 
-*, *::before, *::after { box-sizing: border-box; }
+    .subtitle {
+        font-size: 16px;
+    }
 
-#answer-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: nowrap;
-}
+    .hint {
+        font-size: 14px;
+    }
 
-#user-answer {
-  flex: 0 0 250px;
-  max-width: 100%;
-  padding: 10px;
-  font-size: 20px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  text-align: center;
-  transition: box-shadow 0.12s ease, border-color 0.12s ease;
-}
+    .game-container {
+        padding: 20px;
+        gap: 15px;
+    }
 
-/* 버튼이 줄바꿈으로 내려가지 않도록 고정 */
-#answer-section button {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
+    .game-header {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
 
-/* 포커스 시 레이아웃 변화 방지 */
-#user-answer:focus {
-  outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 4px rgba(76,175,80,0.08);
-}
+    .question-container {
+        min-height: 260px;
+    }
 
-@media (max-width: 520px) {
-  #answer-section {
-    flex-direction: column;
-    gap: 8px;
-  }
-  #user-answer { width: 100%; flex: 1 1 auto; }
-  #answer-section button { width: 100%; }
+    .question-area img {
+        width: 280px;
+        height: 280px;
+    }
+
+    .timer-circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    .timer-number {
+        font-size: 24px;
+    }
+
+    .score-value {
+        font-size: 24px;
+    }
+
+    .answer-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .answer-input {
+        width: 100%;
+    }
+
+    .btn-send {
+        width: 100%;
+    }
+
+    .result-card {
+        padding: 20px 10px;
+    }
+
+    .final-score-number {
+        font-size: 48px;
+    }
 }
