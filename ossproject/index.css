@@ -95,40 +95,40 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 25px 35px;
-    font-size: 16px;
+    font-size: 20px;
     color: white;
     min-width: 150px;
     gap: 8px;
 }
 
 .btn-number {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: 700;
 }
 
 .btn-label {
-    font-size: 12px;
+    font-size: 16px;
     opacity: 0.9;
 }
 
 .btn-easy {
-    background: linear-gradient(135deg, #54c75e 0%, rgb(14, 235, 14) 100%);
+    background: linear-gradient(135deg, #06aa14 0%, rgb(7, 170, 7) 100%);
 }
 
 .btn-easy:hover {
-    background: linear-gradient(135deg, rgb(9, 235, 9) 0%, #54c75e 100%);
+    background: linear-gradient(135deg, rgb(8, 184, 8) 0%, #54c75e 100%);
 }
 .btn-normal {
-    background: linear-gradient(135deg, #fff423 0%, #d0d000 100%);
+    background: linear-gradient(135deg, #d1a209 0%, #b8b80b 100%);
 }
 
 .btn-normal:hover {
-    background: linear-gradient(135deg, #d0d000 0%, #fff423 100%);
+    background: linear-gradient(135deg, #a8a805 0%, #d2c80d 100%);
 }
 
 
 .btn-hard {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #c954d6 0%, #f5576c 100%);
 }
 
 .btn-hard:hover {
