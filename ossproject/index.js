@@ -107,7 +107,7 @@ const questions = [
     { img: "https://res09.bignox.com/appcenter/kr/gp-game-image/e62a9018dbc902a4f99041b2fae2e39d", answer: ["페이데이","페이데이2","payday","payday2"] },
     { img: "img/img88.jpg", answer: ["문명","문명6"] },
     { img: "https://i.namu.wiki/i/QHBE7GjuJho5nyIvXzvBY6isZ6jMJrol9eJajOwxe4_qfskqixFSx_BWNZ6Gj2AHv7e5SJt4YP8n5WTLGoO9pg.webp", answer: ["헬다이버즈"] },
-    { img: "https://upload2.inven.co.kr/upload/2017/05/20/bbs/i15636396809.png?MW=800", answer: ["하스스톤","하스"] },
+    // { img: "https://upload2.inven.co.kr/upload/2017/05/20/bbs/i15636396809.png?MW=800", answer: ["하스스톤","하스"] },
     { img: "img/img91.jpg", answer: ["아이작","아이작의번제"] },
     { img: "https://images.steamusercontent.com/ugc/859481150100324113/C48F74D7E09FADC33746ADD8A526A49907AC4917/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true", answer: ["개리모드"] },
     // { img: "", answer: ["몬스터헌터월드","몬헌"] },
