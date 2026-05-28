@@ -25,7 +25,7 @@
 
 또는
 
-https://kimdeukgap.github.io/ossproject/ossproject/로 접속 가능
+https://kimdeukgap.github.io/ossproject/ossproject/ 해당 주소로 접속 가능
 
 ---
 
