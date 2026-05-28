@@ -2,7 +2,7 @@ let totalRounds = 0;
 let currentRound = 1;
 let maxRound = 0;
 let availableQuestions = [];
-let timeLeft = 7;
+let timeLeft = 10;
 let countdown;
 let score = 0; // 점수 저장
 
@@ -151,7 +151,7 @@ function startTimer() {
     
     if (countdown) clearInterval(countdown);
 
-    timeLeft = 7;
+    timeLeft = 10;
     if (timerNumber) {
         timerNumber.textContent = timeLeft;
     }
@@ -163,15 +163,6 @@ function startTimer() {
         timeLeft--;
         if (timerNumber) timerNumber.textContent = timeLeft;
 
-    //     // 시간이 줄어들면서 색상 변화
-    //     if (timerCircle) {
-    //         if (timeLeft <= 3) {
-    //             timerCircle.style.background = 'conic-gradient(#f5576c, #ff0000)';
-    //         // } else if (timeLeft <= 5) {
-    //         //     timerCircle.style.background = 'conic-gradient(#ffa500, #000000)';
-    //         // }
-    //     }
-    // }
         if (timeLeft <= 0) {
             if (countdown) clearInterval(countdown);
             nextRound();
