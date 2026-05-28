@@ -23,9 +23,9 @@
    - HTML 파일을 우클릭 → **"Open with Live Server"** 선택
 3. 브라우저가 자동으로 열리며 게임 화면이 표시됩니다.
 
-or
+또는
 
-https://kimdeukgap.github.io/ossproject/ossproject/
+https://kimdeukgap.github.io/ossproject/ossproject/로 접속 가능
 
 ---
 
